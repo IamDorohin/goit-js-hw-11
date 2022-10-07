@@ -47,9 +47,9 @@ export default class ImagesApiService {
 
     incrementSumImg() {
         this.sumImg += 40;
-      }
+    }
     
-      resetSumImg() {
+    resetSumImg() {
         this.sumImg = 0;
-      }
+    }
 }
