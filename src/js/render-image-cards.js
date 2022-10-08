@@ -1,4 +1,4 @@
-export default function createImageCards({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) {return`<div class="photo-card">
+export default function createImageCards({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) {return`
                     <div class="photo-card">
                         <a class="gallery-link" href=${largeImageURL}>
                             <img src="${webformatURL}" alt="${tags}" loading="lazy" class="photo-card__image"/>
@@ -22,6 +22,5 @@ export default function createImageCards({ webformatURL, largeImageURL, tags, li
                             </p>
                             <button type="button" class="photo-card__button"> + ADD </button>
                         </div>
-                    </div>
-            </div>`
+                    </div>`
 }

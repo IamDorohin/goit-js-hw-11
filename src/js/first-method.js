@@ -3,7 +3,7 @@ import createImageCards from './js/render-image-cards';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import Pagination from 'tui-pagination';
-// import 'tui-pagination/dist/tui-pagination.css';
+import 'tui-pagination/dist/tui-pagination.css';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 
@@ -56,7 +56,6 @@ async function defaultPage() {
   const { data } = await imagesApiService.defaultFetch();
 
   pagination.setTotalItems(data.totalHits);
-  localStorage.setItem("arrayOfImages", JSON.stringify(data));
 
   if (data.hits.length === 0) {
     Notify.failure(
@@ -96,6 +95,7 @@ async function renderNewPage() {
 
       const newCurrentPage = pagination.getCurrentPage();
       imagesApiService.setPage(newCurrentPage);
+
       const { data } = await imagesApiService.fetchImages();
 
       createGallery(data);
@@ -105,6 +105,7 @@ async function renderNewPage() {
 
 
 // =========================================================  //
+
 
 
 refs.searchForm.addEventListener('submit', onFormSubmit);
@@ -124,12 +125,10 @@ async function onFormSubmit(evt) {
 
     pagination.reset();
     clearGallery();
-    localStorage.clear();
     imagesApiService.resetPage();
 
     const { data } = await imagesApiService.fetchImages();
     pagination.setTotalItems(data.totalHits);
-    localStorage.setItem("arrayOfImages", JSON.stringify(data));
 
     console.log(data);
 
@@ -165,15 +164,15 @@ new SimpleLightbox(".gallery a");
 // ==================== Функціонал додавання картинок до списку ==================== //
 
 
-// refs.addBtn.addEventListener('click', onBtnClick);
+refs.addBtn.addEventListener('click', onBtnClick);
 
-// const STORAGE_KEY = "favourite-images";
-// const storageValues = {
-// };
+const STORAGE_KEY = "favourite-images";
+const storageValues = {
+};
 
-// function onBtnClick() {
+function onBtnClick() {
 
-// }
+}
 
 
 
