@@ -11,10 +11,10 @@ const refs = {
     searchForm: document.querySelector('.search-form'),
     gallery: document.querySelector('.gallery'),
     observer: document.querySelector('#observer'),
-    // додаю контейнер пагінації
+    // додай контейнер пагінації
     pagination: document.querySelector('.tui-pagination'),
     // додаю кнопку додавання картинки до списку улюблених
-    addBtn: document.querySelector('.photo-card__button'),
+    // addBtn: document.querySelector('.photo-card__button'),
 }
 
 const imagesApiService = new ImagesApiService();
@@ -51,42 +51,60 @@ const options = {
 
 const pagination = new Pagination(refs.pagination, options);
 
+// ======================================================================= Виклич функцію, що запускає процес фетча даних. 
+
 defaultPage();
 
 async function defaultPage() {
+// У мене API створена за допомогою класа,
+// тому я першим рядком запускаю процес фетча даних з бекенда defaultFetch() свого класу imagesApiService (const { data } = await imagesApiService.defaultFetch())
+// Тобі просто треба запустити свою функцію фетча
   const { data } = await imagesApiService.defaultFetch();
 
+// В options налаштуваннях pagination загальна кількість даних зазначена мною по дефолту як 100
+// Ти за допомогою метода pagination.setTotalItems визначаєш загальну кількість отриманих картинок по загальній кількості з отриманих фетчем даних totalHits
   pagination.setTotalItems(data.totalHits);
 
-  if (data.hits.length === 0) {
-    Notify.failure(
-      'Sorry, there are no images matching your search query. Please try again.'
-    ),
-      { timeout: 5000 };
+  // if (data.hits.length === 0) {
+  //   Notify.failure(
+  //     'Sorry, there are no images matching your search query. Please try again.'
+  //   ),
+  //     { timeout: 5000 };
 
-    return;
-  }
+  //   return;
+  // }
 
-  Notify.info(`Hooray! We found ${data.totalHits} images.`), { timeout: 3000 };
+  // Notify.info(`Hooray! We found ${data.totalHits} images.`), { timeout: 3000 };
 
+  // Запускаєш функцію відмалювання галереї, яка має отримати результати фетча. У мене це - data. Виклич свою функцію замість неї
   createDefaultGallery(data);
-  console.log(data);
+  // console.log(data);
 }
 
+// Сама функція відмалювання. Встав замість неї свою.
 function createDefaultGallery(data) {
   let defaultMarkup = data.hits.map(createImageCards).join('');
   refs.gallery.insertAdjacentHTML('beforeend', defaultMarkup);
 }
 
+// Повісь прослуховування події на клік по елементам пагінації
 refs.pagination.addEventListener('click', renderNewPage);
 
+// Функція, що запускається по результату кліка по елементам пагінації   
 async function renderNewPage() {
+    // Перевірка. Якщо пошуковий рядок пустий, то просто далі гортаємо сторінки дефолтного запиту
     if(imagesApiService.searchQuery === '') {
+      // Функція очистки галереї перед малюванням нової
       clearGallery();
   
+      // Отримуємо значення сторінки пагінації, на яку тільки но клікнули
       const newCurrentPage = pagination.getCurrentPage();
+
+      // Додай до своїх функцій фетча функцію, що змінить пошуковий параметр page на значення тільки но натиснутої кнопки пагінації,
+      // щоб при запиті нової сторінки відбувся запит саме номеру сторінки, який ти вибрав
       imagesApiService.setPage(newCurrentPage);
     
+      // Після цього повтори фетч даних, що здійснився при 
       const { data } = await imagesApiService.defaultFetch();
     
       createDefaultGallery(data);
