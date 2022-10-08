@@ -8,6 +8,7 @@ export default class ImagesApiService {
         this.searchQuery = '';
         this.page = 1;
         this.sumImg = 0;
+        this.defaultQuery = 'highways';
     }
 
     async fetchImages() {
@@ -29,12 +30,35 @@ export default class ImagesApiService {
         }
     }
 
+    async defaultFetch() {
+        const defaultSearchParams = new URLSearchParams({
+            key: this.#KEY,
+            q: this.defaultQuery,
+            image_type: 'photo',
+            orientation: 'horizontal',
+            safesearch: true,
+            per_page: 40,
+            page: this.page,
+        });
+
+        try {
+            this.incrementSumImg();
+            return await axios.get(`${this.#BASE_URL}?${defaultSearchParams}`);
+        } catch (error) {
+            Notify.failure('ERROR'), { timeout: 3000 };
+        }
+    }
+
     incrementPage() {
         this.page += 1;
     }
 
     resetPage() {
         this.page = 1;
+    }
+
+    setPage(newCurrentPage) {
+        this.page = newCurrentPage;
     }
 
     get query() {

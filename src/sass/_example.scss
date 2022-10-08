@@ -83,8 +83,27 @@ a {
   border-radius: 10px;
 }
 
+.photo-card__button {
+  cursor: pointer;
+
+  top: 8px;
+  right: 8px;
+  
+  width: 50px;
+  height: 35px;
+
+  border: 0 solid transparent;
+  border-radius: 8px;
+
+  background-color: #B6880F;
+  color: white;
+
+  font-size: 10px;
+}
+
 .info {
   display: flex;
+  align-items: center;
   justify-content: space-around;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -94,6 +113,7 @@ a {
   color: white;
   border-radius: 10px;
   border-top: 3px solid #B6880F;
+  font-size: 12px;
 }
 
 .info-item {
@@ -102,3 +122,13 @@ a {
   align-items: center;
   gap: 5px;
 }
+
+// .tui-pagination {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   margin-left: auto;
+//   margin-right: auto;
+//   height: 50px;
+//   width: 200px;
+// }
