@@ -67,10 +67,6 @@ async function renderNewPage() {
     firstElementOfPage = pagination.getCurrentPage() * 4 - 4;
     lastElementOfPage = pagination.getCurrentPage() * 4;
 
-    // console.log(pagination.getCurrentPage());
-    // console.log(firstElementOfPage);
-    // console.log(lastElementOfPage);
-
     createdPage = arrayOfImages.slice(firstElementOfPage, lastElementOfPage);
     createLocalStorageGallery(createdPage);
     // for(let i = 2; i <= numberOfPages; i+=1) {
@@ -91,7 +87,7 @@ function clearGallery() {
 
 // 0  1  2  3		    1	-  0    4
 // 4  5  6  7		    2	-  4    8
-// 8  9  10  11		    3	-  8    12
+// 8  9  10  11		  3	-  8    12
 // 12  13  14  15		4	-  12   16
 // 16  17  18  19		5	-  16   20
 // 20  21  22  23		6	-  20   24

@@ -2,23 +2,20 @@ import ImagesApiService from './js/images-api-service';
 import createImageCards from './js/render-image-cards';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 import Pagination from 'tui-pagination';
 // import 'tui-pagination/dist/tui-pagination.css';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-
 
 const refs = {
     searchForm: document.querySelector('.search-form'),
     gallery: document.querySelector('.gallery'),
     observer: document.querySelector('#observer'),
     pagination: document.querySelector('.tui-pagination'),
-    // додаю кнопку додавання картинки до списку улюблених
-    // addBtn: document.querySelector('.photo-card__button'),
 }
 
 const imagesApiService = new ImagesApiService();
 let lightbox = new SimpleLightbox('.gallery a');
-
 
 // =============== Функціонал пагінації на дефолтному запиті =============== //
 const options = {
@@ -70,7 +67,6 @@ async function defaultPage() {
   Notify.info(`Hooray! We found ${data.totalHits} images.`), { timeout: 3000 };
 
   createDefaultGallery(data);
-  // console.log(data);
 }
 
 function createDefaultGallery(data) {
@@ -169,37 +165,4 @@ function clearGallery() {
 new SimpleLightbox(".gallery a");
 
 
-
-// const onEntry = entries => {
-//   entries.forEach(entry => {
-//     if (entry.isIntersecting && imagesApiService.page !== 1) {
-//       imagesApiService.fetchImages().then(({ data }) => {
-//         if (imagesApiService.sumImg > data.totalHits) {
-//           Notify.info(
-//             "We're sorry, but you've reached the end of search results."
-//           ),
-//             { timeout: 5000 };
-
-//           return;
-//         }
-
-//         if (data.hits.length === 0) {
-//           Notify.failure(
-//             'Sorry, there are no images matching your search query. Please try again.'
-//           ),
-//             { timeout: 5000 };
-
-//           return;
-//         }
-
-//         createGallery(data);
-//       });
-//     }
-//   });
-// };
-
-// const observer = new IntersectionObserver(onEntry, {
-//   rootMargin: '200px',
-// });
-// observer.observe(refs.observer);
 
