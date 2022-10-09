@@ -30,6 +30,24 @@ a {
   background-color: teal;
 }
 
+.local-storage__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 10px;
+  margin-left: 42px;
+  margin-right: 42px;
+
+  height: 50px;
+  width: 1270px;
+
+  border-radius: 10px;
+
+  background-color: teal;
+}
+
 .search-form__input {
   border: 0;
   width: 200px;
@@ -49,12 +67,15 @@ a {
 .search-form__button {
   margin-left: 3px;
   height: 28px;
+  width: 60px;
 
-  border: 1px solid black;
-  border-radius: 5;
+  border: 0 solid transparent;
+  border-radius: 5px;
 
-  color: black;
-  background-color: teal;
+  background-color: #B6880F;
+  color: white;
+
+  font-size: 10px;
 }
 .search-form__button:hover {
   cursor: pointer;
@@ -62,22 +83,39 @@ a {
   color: white;
 }
 
-.local-storage-btn {
+.container__button {
   position: absolute;
   cursor: pointer;
   display: block;
 
-  top: 17px;
-  right: 50px;
-  // margin-left: auto;
-  // margin-right: 42px;
-  // margin-top: 10px;
+  top: 21px;
+  left: 50px;
   
   width: 100px;
-  height: 35px;
+  height: 28px;
 
   border: 0 solid transparent;
-  border-radius: 8px;
+  border-radius: 5px;
+
+  background-color: #B6880F;
+  color: white;
+
+  font-size: 10px;
+}
+
+.local-storage__button {
+  position: absolute;
+  cursor: pointer;
+  display: block;
+
+  top: 11px;
+  left: 8px;
+  
+  width: 100px;
+  height: 28px;
+
+  border: 0 solid transparent;
+  border-radius: 5px;
 
   background-color: #B6880F;
   color: white;

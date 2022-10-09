@@ -1,6 +1,6 @@
-import ImagesApiService from './images-api-service';
+// import ImagesApiService from './images-api-service';
 import createLocalStorageCards from './render-local-storage-gallery';
-import defaultPage from '../index';
+// import defaultPage from '../index';
 import SimpleLightbox from 'simplelightbox';
 import Pagination from 'tui-pagination';
 // import 'tui-pagination/dist/tui-pagination.css';

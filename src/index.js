@@ -83,20 +83,25 @@ refs.pagination.addEventListener('click', renderNewPage);
 async function renderNewPage() {
     if(imagesApiService.searchQuery === '') {
       clearGallery();
+      localStorage.clear();
   
       const newCurrentPage = pagination.getCurrentPage();
 
       imagesApiService.setPage(newCurrentPage);
     
       const { data } = await imagesApiService.defaultFetch();
-    
+      localStorage.setItem("arrayOfImages", JSON.stringify(data));
+
       createDefaultGallery(data);
     } else {
       clearGallery();
+      localStorage.clear();
 
       const newCurrentPage = pagination.getCurrentPage();
       imagesApiService.setPage(newCurrentPage);
       const { data } = await imagesApiService.fetchImages();
+
+      localStorage.setItem("arrayOfImages", JSON.stringify(data));
 
       createGallery(data);
     }
@@ -128,8 +133,6 @@ async function onFormSubmit(evt) {
     imagesApiService.resetPage();
 
     const { data } = await imagesApiService.fetchImages();
-    pagination.setTotalItems(data.totalHits);
-    localStorage.setItem("arrayOfImages", JSON.stringify(data));
 
     console.log(data);
 
@@ -142,9 +145,13 @@ async function onFormSubmit(evt) {
         return;
     }
     
-    Notify.info(`Hooray! We found ${data.totalHits} images.`), { timeout: 3000 };
+    Notify.info(`Hooray! We found ${data.totalHits} images.`
+        ),
+          { timeout: 5000 };
 
     createGallery(data);
+    pagination.setTotalItems(data.totalHits);
+    localStorage.setItem("arrayOfImages", JSON.stringify(data));
 }
 
 function createGallery(data) {
@@ -160,23 +167,6 @@ function clearGallery() {
 }
 
 new SimpleLightbox(".gallery a");
-
-
-// ==================== Функціонал додавання картинок до списку ==================== //
-
-
-// refs.addBtn.addEventListener('click', onBtnClick);
-
-// const STORAGE_KEY = "favourite-images";
-// const storageValues = {
-// };
-
-// function onBtnClick() {
-
-// }
-
-
-
 
 
 
